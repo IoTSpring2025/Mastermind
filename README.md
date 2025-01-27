@@ -59,6 +59,7 @@ Assuming you have installed the requirements, you can run a linter by running
 which will format all of the python files in the directory specified. you can just do '.' for that
 
 ### ML Model setup
+The dataset and base code were adapted from here: [Kaggle Link](https://www.kaggle.com/datasets/gpiosenka/cards-image-datasetclassification)
 Right now, I trained the initial model using a T4 GPU on Google Collaboratory. To run inference with the model, you need to be running on a device with the same processor (GPU vs CPU) that the model was trained on. The model weights are saved in the 
 
 I.e., if I train the model on a GPU and save the weights (right now I save them to [weights.pth](Mastermind/model/weights.pth)), in order to run inference with this model, I need to use a device with a GPU (I am not able to run inference on my PC that does not have GPU/CUDA support).
