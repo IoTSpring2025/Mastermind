@@ -4,13 +4,11 @@ import numpy as np
 import io
 from model.classifier import CardClassifierMachine
 import os
-
-print("cwd: ", os.getcwd())
-print("ls: ", os.listdir())
+import torch 
 
 server = FastAPI()
+gpu_enabled = torch.cuda.is_available()
 classifier = CardClassifierMachine()
-
 
 @server.post("/predict")
 async def predict(image: UploadFile = File(...)):

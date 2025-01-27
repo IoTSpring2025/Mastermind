@@ -14,11 +14,11 @@ class CardClassifierMachine:
     def __init__(self):
         # load model, set to eval mode
         self.model = CardClassifierModel()
-
+        print("DEVICE: ", DEVICE)
         if os.path.exists(MODEL_PATH):
-            self.model.load_state_dict(torch.load(MODEL_PATH))
+            self.model.load_state_dict(torch.load(MODEL_PATH, weights_only=True), map_location=torch.device(DEVICE))
         else:
-            self.model.load_state_dict(torch.load("model/weights.pth"))
+            self.model.load_state_dict(torch.load("model/weights.pth", weights_only=True), map_location=torch.device(DEVICE))
         self.model.to(DEVICE)
         self.model.eval()
 
