@@ -67,22 +67,21 @@ I.e., if I train the model on a GPU and save the weights (right now I save them 
 ### Docker
 We will use Docker to containerize our web server application so that we can run it in AWS. We need to decide on if we should run it in ECS or EC2. But this server will have an API endpoint where we can make an HTTP POST request via the Raspberry Pi and receive the predicted class in return.
 
-To build the docker container locally, run
+To build and run the server locally, first run:
 
-`docker build . -t <CONTAINER_NAME>`
+`./build_docker_local.sh`
 
-then, to run the container run
+if you are using an amd64 GPU machine, run:
 
-`docker run -p 80:80 <CONTAINER_NAME>`
+`./build_docker_for_amd64`
 
-Or, just run the scripts called [build_docker.sh](Mastermind/build_docker.sh) and [run_docker.sh](Mastermind/run_docker.sh) respectively, which just do the same thing. You can run it like this:
+and then run 
 
-`./build_docker.sh`
+`run_server.sh`
 
-A really helpful way to debug the container can be to run 
 
-`docker run -it <CONTAINER_NAME> sh` 
+this will open the server on your localhost machine. If you are on a mac, I think you need to also install docker desktop and make sure that is running as well to kick off the docker daemon. To test out the inference, run 
 
-to open a shell in the container.
+`./test_http_post.sh`
 
-It can also be helpful to install Docker Desktop if you want to view your containers that ways
+Note: right now, we didnt train the model on GPU so did 1 epoch on CPU in order to get the localhost server working on my local machine. So the output is wrong as it is not really trained.

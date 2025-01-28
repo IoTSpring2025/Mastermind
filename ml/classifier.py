@@ -18,7 +18,9 @@ class CardClassifierMachine:
         if os.path.exists(MODEL_PATH):
             self.model.load_state_dict(torch.load(MODEL_PATH, weights_only=True))
         else:
-            self.model.load_state_dict(torch.load("model/weights.pth", weights_only=True))
+            self.model.load_state_dict(
+                torch.load("model/weights.pth", weights_only=True)
+            )
         self.model.to(DEVICE)
         self.model.eval()
 
@@ -26,9 +28,7 @@ class CardClassifierMachine:
         with open(CLASS_MAPPING_PATH) as class_json:
             self.class_map = json.load(class_json)
 
-    def preprocess_image(self, image_path):
-        image = cv2.imread(io.BytesIO(image_path))
-
+    def preprocess_image(self, image):
         # rgb
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
@@ -56,7 +56,7 @@ class CardClassifierMachine:
             output = self.model(image_tensor)
 
         # take softmax to get most probable class. this will need to change for when we predict multiple classes
-        probabilities = torch.nn.functional.softmax(outputs[0], dim=0)
+        probabilities = torch.nn.functional.softmax(output[0], dim=0)
         predicted_class = torch.argmax(probabilities).item()
 
         # should we return the class number or word here?
