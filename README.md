@@ -64,6 +64,37 @@ Right now, I trained the initial model using a T4 GPU on Google Collaboratory. T
 
 I.e., if I train the model on a GPU and save the weights (right now I save them to [weights.pth](Mastermind/model/weights.pth)), in order to run inference with this model, I need to use a device with a GPU (I am not able to run inference on my PC that does not have GPU/CUDA support).
 
+#### Training
+To train the model, we will need to make sure that it runs on a GPU. To train, either run the training script in Google Colab on a GPU compute unit and download the outputted weights to your local PC, or if you are running on a local GPU, you will need to do the following:
+
+1. make sure you have a python virtual environment set up
+2. install ipykernel: `pip install ipykernel`
+3. make the kernel accessable in jupyter: `python -m ipython kernel install --name "[NAME_OF_YOUR_VENV]`
+4. select your kernel as your virtual environment you just created
+
+The training script is [train.ipynb](ml/train.ipynb). To verify that the script is running on the GPU, when you run the cell
+
+```
+print("Torch", torch.__version__, "CUDA", torch.version.cuda)
+print("Device:", DEVICE)
+```
+
+You should see something like this:
+
+```
+Torch 2.5.1+cu121 CUDA 12.1
+Device: cuda:0
+```
+
+If you see something like this:
+
+```
+Torch 2.5.1 CUDA None
+Device: cpu
+```
+
+It means that PyTorch could not detect a GPU, and that the code will run on the CPU.
+
 ### Docker
 We will use Docker to containerize our web server application so that we can run it in AWS. We need to decide on if we should run it in ECS or EC2. But this server will have an API endpoint where we can make an HTTP POST request via the Raspberry Pi and receive the predicted class in return.
 
