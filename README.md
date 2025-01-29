@@ -69,7 +69,7 @@ To train the model, we will need to make sure that it runs on a GPU. To train, e
 
 1. make sure you have a python virtual environment set up
 2. install ipykernel: `pip install ipykernel`
-3. make the kernel accessable in jupyter: `python -m ipython kernel install --name "[NAME_OF_YOUR_VENV]`
+3. make the kernel accessable in jupyter: `python -m ipykernel install --user --name="[NAME_OF_YOUR_VENV]"`
 4. select your kernel as your virtual environment you just created
 
 The training script is [train.ipynb](ml/train.ipynb). To verify that the script is running on the GPU, when you run the cell
