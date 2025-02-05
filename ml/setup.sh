@@ -9,4 +9,3 @@ cd dataset
 unzip ../dataset 
 cd ..
 
-python3 -m ipykernel install --user --name="venv"
