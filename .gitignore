@@ -175,3 +175,5 @@ cython_debug/
 
 IoTVenv/
 */__pycache__/
+
+ml/Card-Detection-1/*
