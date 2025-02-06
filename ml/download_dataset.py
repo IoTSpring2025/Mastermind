@@ -6,7 +6,7 @@ project = os.environ.get("ROBOFLOW_PROJECT")
 
 rf = Roboflow(api_key=api_key)
 project = rf.workspace(workspace).project(project)
-version = project.version(1)
-dataset = version.download("yolov5")
+version = project.version(3)
+dataset = version.download("yolov5", location="dataset")
 
 print("Dataset successfully downloaded.")
